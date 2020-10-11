@@ -1,5 +1,5 @@
 # Kubernetes
-대규모 서비스 지원 환경에서 효율적인 자원 이용을 위한 `Container Orchestration OpenSource` 이며 다음과 같은 이점을 갖는다    
+대규모 서비스 지원 환경에서 효율적인 자원 이용을 위한 `Container Orchestration OpenSource` 이며 다음과 같은 장점이 있다      
     
 - Scalability, high performance  
 - High Availability, no downtime  
@@ -25,13 +25,13 @@ Kubernetes 는 이런 컨테이너의 장점을 활용하여
 ![Table](images/architecture.png)
 
 
-#### Worker Node
+### Worker Node
 실제 Docker 와 같은 Containerization SW 의 컨테이너가 동작하는 노드이다  
 Cluster 내의 Worker Node 들은 Kublet 프로세스를 통해 서로 통신이 가능하고  
 각각 할당된 Task 나 Application 을 실행한다  
 
 
-#### Master Node
+### Master Node
 `API Server` : Worker Cluster 관리, Cluster 의 entrypoint 역할  
 `Controller Manager` : Cluster 내부에서 일어나는 이벤트를 분석하는 역할  
 `Scheduler` : Worker Node 의 작업량이나 사용 가능 리소스를 기반으로 컨테이너를 할당하는 역할  
