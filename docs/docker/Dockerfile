@@ -1,0 +1,4 @@
+FROM openjdk:13-jdk
+EXPOSE 8080
+COPY K8S-0.0.1-SNAPSHOT.jar .
+ENTRYPOINT ["java", "-jar", "K8S-0.0.1-SNAPSHOT.jar"]
