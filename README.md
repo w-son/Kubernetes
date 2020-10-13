@@ -14,6 +14,8 @@
 
 #### [3. Components](docs/components.md)
 
+#### [4. Minikube and Kubectl](docs/mk.md)
+
 ## Tutorials
 
 #### [1. Build Docker images](docs/docker/docker.md)
