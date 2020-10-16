@@ -16,13 +16,13 @@ Minikube 를 이용한 Kubernetes cluster 생성과 환경 설정에 대해 간�
 ### 2. hyperkit & minikube 설치 
 `mikikube` 그리고 사용될 hypervisor 인 `hyperkit` 을 설치한다  
 ```shell script
-// minikube 설치 시 kubectl 에 의존성이 있어 자동으로 같이 설치해주므로 따로 설치할 필요 없다
+# minikube 설치 시 kubectl 에 의존성이 있어 자동으로 같이 설치해주므로 따로 설치할 필요 없다
 
 brew update
 brew install hyperkit
 brew install minikube   
 
-// 다음 명령어들을 통해 정상적으로 설치 되었는지 확인해보자
+# 다음 명령어들을 통해 정상적으로 설치 되었는지 확인해보자
 
 kubectl
 minikube 

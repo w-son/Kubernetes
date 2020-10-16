@@ -20,4 +20,6 @@
 
 #### [1. Setting up Environments](docs/environments.md)
 
-#### [2. Build Docker images](docs/docker/docker.md)  
+#### [2. Deployments and Pods](docs/dp.md)
+
+#### [# Build Docker images](docs/docker.md)

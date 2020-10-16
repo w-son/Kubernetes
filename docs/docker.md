@@ -1,8 +1,9 @@
 # Build Docker images
-로컬 터미널 환경 혹은 클라우드 서버 인스턴스 환경을 바탕으로 Kubernetes 에서 활용될 이미지를 빌드한다  
+Kubernetes cluster 에 대해 자세히 공부하기 전에 기초적인 Docker image 에 대한 지식을 짚고 넘어 가보자  
+로컬 터미널 환경 혹은 클라우드 서버 인스턴스 환경을 바탕으로 Kubernetes 에서 활용될 이미지를 빌드 해볼 것이다    
 
 
-간단한 SpringBoot jar 파일을 토대로 [Dockerfile](Dockerfile) 을 작성한다  
+간단한 SpringBoot jar 파일을 토대로 [Dockerfile](../sources/Dockerfile) 을 작성한다  
 현 예제에서는 AWS 의 ubuntu 서버를 이용하며 Dockerfile 과 jar 파일이 같은 디렉토리에 있음을 가정한다  
 
 #### 1. Docker 설치

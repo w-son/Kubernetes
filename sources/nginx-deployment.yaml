@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+# component that you want to create
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+# specification for deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  # blueprints for the pod
+  template:
+    metadata:
+      labels:
+        app: nginx
+    # specification for pod
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.16
+          ports:
+            - containerPort: 80
