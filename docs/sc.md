@@ -2,15 +2,18 @@
 Kubernetes Cluster 내의 Configuration 정보들을 앞서 배운 Component 들을 활용하여 어떻게 관리할 수 있는지 공부해보자     
 가장 이해하고 다뤄보기 쉬운 DB 환경을 설계 해볼것이다  
 
+![Table](../images/mongo.png)
+
 - MongoDB  
 - Mongo Express  
 - MongoDB 의 url 정보를 담고 있는 `ConfigMap`  
 - MongoDB 의 credentials 정보를 담고 있는 `Secret`  
-- `Secret` 과 `ConfigMap` 을 참고하는 [mongo.yaml](../sources/mongo.yaml)
+- K8S 내 외부로 DB 에 접근을 돕는 `Service` 들
 
 현재 [mongo.yaml](../sources/mongo.yaml) 은 생성이 완료된 `Secret` 과 `ConfigMap` 을 참조하는 완성품(?) 이라고 볼 수 있지만  
 `Secret` 과 `ConfigMap` 을 먼저 생성한 이후에 설정 파일이 이를 참조할 수 있고  
 생성 이전에 임의의 참조값을 사용하게 된다면 에러가 발생할 것이니 무턱대고 [mongo.yaml](../sources/mongo.yaml) 를 복붙하는 일이 없도록 유의하자        
+
 
 ## Secret
 [mongo-secret.yaml](../sources/mongo-secret.yaml) 에 MongoDB credentials 정보를 담는다  
@@ -79,4 +82,56 @@ deployment.apps/mongodb-deployment   0/1     1            0           4m19s
 
 NAME                                           DESIRED   CURRENT   READY   AGE
 replicaset.apps/mongodb-deployment-ffb479dbc   1         1         0       4m19s
+```
+
+
+## Internal Service
+다음은 MongoDB 에 종속되는 Service 를 구성할 것이다  
+[mongo.yaml](../sources/mongo.yaml) 내부에 `---` 문자열로 문서를 구분해서 작성하면 `Deployment` 과 함께 `Service` 설정을 정의할 수 있다     
+
+| Values | Description |
+|:---:|:---:|
+| `selector:app` | 연결할 `Pod` label |
+| `port` | `Service` 에 열어둘 포트, MongoDB에 포워딩할 포트 |
+| `targetPort` | 실제 서비스가 동작중인 포트, MongoDB 의 포트 |
+
+
+설정을 추가한 mongo.yaml 을 다시 적용해보자  
+```shell script
+# Command
+kubectl apply -f mongo.yaml
+
+# Console Output
+deployment.apps/mongodb-deployment unchanged
+service/mongodb-service created
+``` 
+
+명시한 대로 mongodb-service 가 생성되었다  
+관련 설정들이 정상적으로 적용이 되었는지 다음 명령어들을 통해 확인해보자  
+```shell script
+# Command
+kubectl get service
+
+# Console Output
+NAME              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)     AGE
+kubernetes        ClusterIP   10.96.0.1      <none>        443/TCP     3d2h
+mongodb-service   ClusterIP   10.104.105.5   <none>        27017/TCP   55s
+
+# Command
+kubectl describe service mongodb-service
+
+# Console Output
+Name:              mongodb-service
+Namespace:         default
+Labels:            <none>
+Annotations:       kubectl.kubernetes.io/last-applied-configuration:
+                     {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"mongodb-service","namespace":"default"},"spec":{"ports":[{"port":...
+Selector:          app=mongodb
+Type:              ClusterIP
+IP:                10.104.105.5
+Port:              <unset>  27017/TCP
+TargetPort:        27017/TCP
+Endpoints:         {이 위치에 원래 URI:포트 정보가 보여야 함}
+Session Affinity:  None
+Events:            <none>
 ```
