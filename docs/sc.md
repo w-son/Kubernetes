@@ -210,3 +210,59 @@ basicAuth credentials are "admin:pass", it is recommended you change this in you
 Database connected
 Admin Database connected
 ```
+
+
+## External Service
+이제 마지막으로 Mongo Express 위에서 동작할 Service 를 정의해보자  
+`Internal Service` 에서 했던 것과 마찬가지로 특정 `Pod` 에 종속되는 `Service` 의 설정은 동일한 파일에 `---` 로 구분하여 작성한다  
+실제로도 `Pod` 의 blueprint 인 `Deployment` 와 함께 구동되는 `Service` 는 같은 yaml 파일에 작성한다고 한다  
+
+
+[mongo-express.yaml](../sources/mongo-express.yaml) 하단에 설정 내용을 추가하였고 `Internal Service` 와 거의 동일한 키값으로 설정을 구성하였고   
+`External Service` 를 구성하기 위해서는 다음과 같은 추가 설정이 필요하다  
+- `spec:type` : Loadbalancer 값을 주어 외부 요청을 받기 위한 IP 를 할당 받을 수 있게 한다  
+- `nodePort` : 외부 요청을 받을, 즉 Mongo Express 의 8081 로 포워딩 시킬 포트 번호를 지정한다 (30000-32767)  
+
+
+설정이 완료 되었다면 이제 적용시켜보자  
+```shell script
+# Command
+kubectl apply -f mongo-express.yaml
+```
+
+적용 이후 service 를 조회해보자  
+```shell script
+# Command
+kubectl get service
+
+# Console Output
+NAME                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes              ClusterIP      10.96.0.1       <none>        443/TCP          3d4h
+mongo-express-service   LoadBalancer   10.110.63.225   <pending>     8081:30000/TCP   34s
+mongodb-service         ClusterIP      10.104.105.5    <none>        27017/TCP        121m
+```
+Console Output 을 확인해보면 이전에 생성했던 mongodb-service 의 `TYPE` 는 `ClusterIP`이고  
+방금 생성한 mongo-express-service 의 `TYPE` 는 `LoadBalancer` 임을 볼 수 있다  
+우리가 명시적으로 설정을 해주었던 `LoadBalancer` 과는 달리 `ClusterIP` 는 기본값임을 알 수 있고  
+Minikube 가 아닌 실 환경에서 클러스터 설정을 하였다면 `LoadBalancer` 의 `EXTERNAL_IP` 값이  
+`<pending>` 이 아닌 실제 외부에서 접속이 가능한 주소로 보였을 것이다  
+
+
+Minikube 환경에서 IP 를 할당받기 위해 접근가능한 External Service 에 다음 명령어를 입력해보자    
+```shell script
+# Command
+minikube service mongo-express-service
+
+# Console Output
+|-----------|-----------------------|-------------|---------------------------|
+| NAMESPACE |         NAME          | TARGET PORT |            URL            |
+|-----------|-----------------------|-------------|---------------------------|
+| default   | mongo-express-service |        8081 | http://192.168.64.2:30000 |
+|-----------|-----------------------|-------------|---------------------------|
+🎉  Opening service default/mongo-express-service in default browser...
+```
+Console Output 과 함께 외부로서부터 접근이 가능한 Mongo Express UI 가 브라우저를 통해 뜰 것이다   
+
+
+이제 Minikube 를 활용한 Kubernetes Cluster 환경 테스트를 위한 튜토리얼이 끝났다!  
+Kubernetes 와 이를 구성하는 Component 에 대해 다시금 소스를 참고해보며 공부해보고 추가적으로 보완할 것이 있으면 다시 공부해보자   
