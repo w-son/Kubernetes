@@ -22,4 +22,6 @@
 
 #### [2. Deployments and Pods](docs/dp.md)
 
+#### [3. Secret and ConfigMap](docs/sc.md)
+
 #### [# Build Docker images](docs/docker.md)
