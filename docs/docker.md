@@ -1,5 +1,5 @@
 # Build Docker images
-Kubernetes cluster 에 대해 자세히 공부하기 전에 기초적인 Docker image 에 대한 지식을 짚고 넘어 가보자  
+Kubernetes cluster 학습에 추가로 기초적인 Docker image 에 대한 지식을 짚고 넘어 가보자  
 로컬 터미널 환경 혹은 클라우드 서버 인스턴스 환경을 바탕으로 Kubernetes 에서 활용될 이미지를 빌드 해볼 것이다    
 
 
