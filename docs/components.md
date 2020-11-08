@@ -10,6 +10,12 @@
 - `Pod` 가 system crash 로 인해 재부팅되거나 재할당 되면 IP 주소 역시 새로 할당받는다  
 
 
+## Deployment    
+- Pod 의 Blueprint 를 나타내는 Component 이다 
+- Pod 보다 한 단계 높은 추상화를 나타내고 실제로 Pod 를 생성하거나 복제할 때 `Deployment` 가 사용된다  
+- 몇 개의 replica 를 생성할 것이며 scaling 과 관련된 정보가 이에 속한다  
+
+
 ## Service
 - Pod 가 불필요하게 IP 를 재할당 받지 않기 위해 고정 IP 를 할당하는 Component 이다  
 - lifeCycle 이 다르기 때문에 Pod 가 죽더라도 `Service` 가 할당하는 IP 는 변동치 않는다  
@@ -35,23 +41,19 @@
 - DB username 이나 password 와 같은 정보를 담는다  
 - 저장 내용을 plaintext 가 아닌 Base64 로 인코딩한다   
 
+위와 같은 Component 에 리소스 정보를 넣고 관리함으로써 재배포 프로세스를 간편화한다     
+
 
 ## Volumes  
 DBMS 가 관리하는 데이터가 컨테이너 내부에 종속되지 않고  
 - Local Storage, 즉 컨테이너가 아닌 Node 내부 저장 공간  
-- Remote Storage, 즉 다른 노드 혹은 Cloud 와 같은 cluster 외부 저장 공간  
+- Remote Storage 혹은 Cloud Storage 와 같은 cluster 외부 저장 공간  
+
 에 저장될 수 있게끔 도와주는 Component 이다 
-
-
-## Deployment    
-- Pod 의 blueprint 를 나타내는 Component 이다 
-- Pod 보다 한 단계 높은 추상화를 나타내고 실제 같은 Pod 를 복제할 때 `Deployment` 가 사용된다  
-- 몇 개의 replica 를 생성할 것이며 scaling 과 관련된 정보가 이에 속한다  
  
 
 ## StatefulSet
-- DB 와 같이 상태를 가져 replica 를 생성하기 힘든 컨테이너를 대상으로 Deployment 의 기능을 수행한다  
+- DB 와 같이 상태(Transaction)를 가져 replica 를 생성하기 힘든 컨테이너를 대상으로 Deployment 의 기능을 수행한다  
 - DB 와 같은 서비스를 제공하는 컨테이너들의 상태값이 일관성이 있게끔 서비스를 제공한다  
-- `StatefulSet` 을 이용하기는 기술적으로 어려운 부분이 많기 때문에  
-   통상적으로 DB 와 같은 자원들은 Cluster 밖에서 관리될 수 있게끔 설계하는 것이 좋다  
+- `StatefulSet` 설정이 복잡하기 때문에 DB 와 같은 자원들은 Cluster 밖에서 관리될 수 있게끔 설계하는 것이 좋다  
    

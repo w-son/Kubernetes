@@ -17,5 +17,5 @@ Cluster 내의 Worker Node 들은 Kublet 프로세스를 통해 서로 통신이
 
 
 Kubernetes Cluster 를 이용하는 외부 Client, API 혹은 UI 는 Master Node 를 통해서만 통신이 가능하며  
-Master Node 역시 중요한 기능을 담당하는 노드인 만큼 백업 노드를 클러스터 내부에 배치하는 것이 통상적인 설계 방법이다  
+Master Node 역시 중요한 기능을 담당하는 노드인 만큼 백업 노드를 클러스터 내부에 배치하는 것이 일반적인 아키텍쳐 설계 방법이다  
 

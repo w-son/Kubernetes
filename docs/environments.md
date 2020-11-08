@@ -3,7 +3,7 @@ Minikube 를 이용한 Kubernetes cluster 생성과 환경 설정에 대해 간�
 
 
 현 프로젝트의 경우에는 `Mac OS` 환경에서 설치를 진행하였고  
-원한다면 `ubuntu` 나 `CentO`S 처럼 Linux 를 지원하는 머신에서 `Linuxbrew` 를 이용해 동일한 환경을 구성할 수 있다  
+원한다면 `ubuntu` 나 `CentOS` 처럼 Linux 를 지원하는 머신에서 `Linuxbrew` 를 이용해 동일한 환경을 구성할 수 있다  
 다만, AWS 나 Azure 에서 제공하는 클라우드 프리티어 상품의 서버를 이용하는 경우에는  
 `minikube` 를 가동하기 위해 최소한으로 만족해야하는 자원인 `2개 CPU`, `4GB 이상 메모리`가 지원이 안 될 가능성이 높기 때문에  
 이 점을 충분히 고려하고 환경을 구축하기 바란다  
@@ -14,7 +14,7 @@ Minikube 를 이용한 Kubernetes cluster 생성과 환경 설정에 대해 간�
 ```
 
 ### 2. hyperkit & minikube 설치 
-`mikikube` 그리고 사용될 hypervisor 인 `hyperkit` 을 설치한다  
+`mikikube` 와 hypervisor `hyperkit` 을 설치한다  
 ```shell script
 # minikube 설치 시 kubectl 에 의존성이 있어 자동으로 같이 설치해주므로 따로 설치할 필요 없다
 

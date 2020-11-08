@@ -218,7 +218,7 @@ Admin Database connected
 실제로도 `Pod` 의 blueprint 인 `Deployment` 와 함께 구동되는 `Service` 는 같은 yaml 파일에 작성한다고 한다  
 
 
-[mongo-express.yaml](../sources/mongo-express.yaml) 하단에 설정 내용을 추가하였고 `Internal Service` 와 거의 동일한 키값으로 설정을 구성하였고   
+[mongo-express.yaml](../sources/mongo-express.yaml) 하단에 설정 내용을 추가하였고 `Internal Service` 와 거의 동일한 키값으로 설정을 구성하였다    
 `External Service` 를 구성하기 위해서는 다음과 같은 추가 설정이 필요하다  
 - `spec:type` : Loadbalancer 값을 주어 외부 요청을 받기 위한 IP 를 할당 받을 수 있게 한다  
 - `nodePort` : 외부 요청을 받을, 즉 Mongo Express 의 8081 로 포워딩 시킬 포트 번호를 지정한다 (30000-32767)  

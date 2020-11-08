@@ -1,10 +1,11 @@
 # Kubernetes
-`Container Orchestration OpenSource`으로       
+Kubernetes 는 `Container Orchestration OpenSource`으로       
 - Scalability, high performance  
 - High Availability, no downtime  
 - Disaster Recovery, backup and restore  
 
 등을 지원하며 서버 운영 효율성을 극대화 시킬 수 있다  
+Kubernetes 아키텍쳐 및 튜토리얼 소스는 [Amigoscode 채널](https://www.youtube.com/user/djdjalas) 과  [Kubernetes 공식문서](https://kubernetes.io/ko/docs/tutorials/) 를 참고하였다  
 
 ## Contents
 
